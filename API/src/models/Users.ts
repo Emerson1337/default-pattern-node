@@ -9,16 +9,16 @@ import {
 class User {
 
   @ObjectIdColumn()
-  id: ObjectID | undefined;
+  id: ObjectID;
 
   @Column()
-  name: string | undefined;
+  name: string;
 
   @Column()
-  email: string | undefined;
+  email: string;
 
   @Column()
-  password: string | undefined;
+  password: string;
 
 }
 

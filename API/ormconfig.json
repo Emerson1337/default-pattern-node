@@ -5,6 +5,7 @@
   "database": "systemindustry",
   "synchronize": true,
   "logging": false,
+  "useUnifiedTopology": true,
   "entities": [
     "./src/models/*.ts"
   ],

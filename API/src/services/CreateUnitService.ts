@@ -1,9 +1,8 @@
-import { response } from "express";
-import { getCustomRepository, getMongoRepository } from "typeorm";
-import Machine from "../models/Machines";
+import { getCustomRepository } from "typeorm";
 import Unit01 from "../models/Unit01";
-import User from "../models/Users";
+import Unit02 from "../models/Unit02";
 import Unit01Repository from "../repositories/Unit01Repository copy";
+import Unit02Repository from "../repositories/Unit02Repository";
 
 interface UnitData {
   name: string;
@@ -12,13 +11,13 @@ interface UnitData {
 }
 
 class CreateUnitService {
-  public async execute({ name, machine, supervisors }: UnitData) {
+  public async executeUni01({ name, machine, supervisors }: UnitData) {
     const unit01Repository = getCustomRepository(Unit01Repository);
 
     const unit01AlreadyExists = await unit01Repository.findOne({ name });
 
     if (unit01AlreadyExists) {
-      return ({ error: "ja existe" })
+      return ({ error: "Esta unidade já foi cadastrada!" })
     }
     const unit = new Unit01();
     unit.name = name;
@@ -26,6 +25,24 @@ class CreateUnitService {
     unit.supervisors = supervisors;
 
     await unit01Repository.save(unit);
+
+    return unit;
+  }
+
+  public async executeUni02({ name, machine, supervisors }: UnitData) {
+    const unit02Repository = getCustomRepository(Unit02Repository);
+
+    const unit02AlreadyExists = await unit02Repository.findOne({ name });
+
+    if (unit02AlreadyExists) {
+      return ({ error: "Esta unidade já foi cadastrada!" })
+    }
+    const unit = new Unit02();
+    unit.name = name;
+    unit.machine = machine;
+    unit.supervisors = supervisors;
+
+    await unit02Repository.save(unit);
 
     return unit;
   }

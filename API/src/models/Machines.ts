@@ -4,11 +4,7 @@ import {
   ObjectIdColumn,
   Column
 } from "typeorm";
-
-class User_id {
-  @ObjectIdColumn()
-  user_id: ObjectID;
-}
+import User_id from '../models/User_idClass'
 
 @Entity()
 class Machine {
@@ -24,8 +20,11 @@ class Machine {
   @Column()
   model: string;
 
-  @Column(type => User_id)
-  supervisor: User_id;
+  @Column()
+  description: string;
+
+  @Column()
+  supervisor: string;
 
   @Column()
   status: {
@@ -35,7 +34,7 @@ class Machine {
   }
 
   @Column()
-  saude: number;
+  health: number;
 }
 
 export default Machine;

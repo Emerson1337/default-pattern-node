@@ -1,9 +1,9 @@
 import { EntityRepository, Repository } from 'typeorm';
 
-import Machines from '../models/Machines';
+import Machine from '../models/Machines';
 
-@EntityRepository(Machines)
-class MachinesRepository extends Repository<Machines>{
+@EntityRepository(Machine)
+class MachinesRepository extends Repository<Machine>{
 }
 
 export default MachinesRepository;

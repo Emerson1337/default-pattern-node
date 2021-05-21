@@ -1,6 +1,5 @@
 import { hash } from "bcrypt";
 import { getCustomRepository, getMongoRepository } from "typeorm";
-import User from "../models/Users";
 import UsersRepository from "../repositories/UserRepository";
 
 interface UserData {

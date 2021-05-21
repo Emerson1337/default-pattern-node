@@ -23,9 +23,6 @@ class Unit01 {
   @Column()
   name: string;
 
-  @Column(type => User_id)
-  supervisors: User_id[];
-
   @Column(type => Machine_id)
   machine: Machine_id[];
 }

@@ -27,11 +27,7 @@ class Machine {
   supervisor: string;
 
   @Column()
-  status: {
-    type: string,
-    enum: ['Em operação', 'Em alerta', 'Parada'],
-    default: 'Parada'
-  }
+  status: string;
 
   @Column()
   health: number;

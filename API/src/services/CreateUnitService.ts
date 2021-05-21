@@ -11,7 +11,7 @@ interface UnitData {
 }
 
 class CreateUnitService {
-  public async executeUni01({ name, machine, supervisors }: UnitData) {
+  public async executeUni01({ name, machine }: UnitData) {
     const unit01Repository = getCustomRepository(Unit01Repository);
 
     const unit01AlreadyExists = await unit01Repository.findOne({ name });
@@ -22,14 +22,13 @@ class CreateUnitService {
     const unit = new Unit01();
     unit.name = name;
     unit.machine = machine;
-    unit.supervisors = supervisors;
 
     await unit01Repository.save(unit);
 
     return unit;
   }
 
-  public async executeUni02({ name, machine, supervisors }: UnitData) {
+  public async executeUni02({ name, machine }: UnitData) {
     const unit02Repository = getCustomRepository(Unit02Repository);
 
     const unit02AlreadyExists = await unit02Repository.findOne({ name });
@@ -40,7 +39,6 @@ class CreateUnitService {
     const unit = new Unit02();
     unit.name = name;
     unit.machine = machine;
-    unit.supervisors = supervisors;
 
     await unit02Repository.save(unit);
 

@@ -27,11 +27,18 @@ class CreateMachineService {
       return ({ error: "Este responsável não pertence a empresa!" })
     }
 
+    const machineWithSameName = await machineRepository.findOne({ name });
+
+    if (machineWithSameName) {
+      return ({ error: "This machine name already registered on database" });
+    }
+
     const machine = new Machine();
     machine.image = image;
     machine.name = name;
     machine.description = description;
     machine.model = model;
+    machine.status = status;
     machine.supervisor = supervisor;
     machine.health = health;
 

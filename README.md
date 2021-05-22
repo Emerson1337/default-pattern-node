@@ -1,5 +1,11 @@
 BACK-END
 
+resta: 
+Mostrar empresas;
+Ações como att responsável a maquina, empresa, unidade e usuários;
+Utilizar gráficos para mostrar os níveis de saúde, status e etc.
+
+
 Imagine o seguinte:
 
 Os nossos usuários, Emerson e Roberta, são gerentes de manutenção na Indústria Freios Supremos (fabricante de autopeças), possuem 2 unidades e 10 ativos (máquinas) ao todo. Elxs gostariam de poder cadastrar e visualizar tanto as unidades separadamente, quanto ter uma visão geral que condensa os dados das duas unidades.

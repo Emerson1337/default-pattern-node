@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 import 'reflect-metadata';
 import express from 'express';
 import router from './routes/routes';

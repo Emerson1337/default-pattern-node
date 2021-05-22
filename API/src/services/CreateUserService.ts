@@ -15,7 +15,7 @@ class CreateUserService {
     const userAlreadyExists = await userRepository.findOne({ email });
 
     if (userAlreadyExists) {
-      throw new Error("Email has already been registered!");
+      return ({ error: "Email has already been registered!" });
     }
 
     const passwordEncrypted = await hash(password, 8);

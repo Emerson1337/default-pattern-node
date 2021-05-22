@@ -1,5 +1,5 @@
-import { response } from "express";
 import { getCustomRepository } from "typeorm";
+import Machine from "../models/Machines";
 import Unit01Repository from "../repositories/Unit01Repository";
 import Unit02Repository from "../repositories/Unit02Repository";
 
@@ -10,10 +10,11 @@ class UnitManageService {
     const unit02Repository = getCustomRepository(Unit02Repository);
 
     const machineAlreadyInUnit = await unit02Repository.findOne({
-      machines: [{
-        machine_id: machine
-      }]
+      where: {
+        'machines': { machine_id: machine }
+      }
     })
+
 
     if (machineAlreadyInUnit) {
       return ({
@@ -22,9 +23,9 @@ class UnitManageService {
     }
 
     const machineAlreadyRegistered = await unit01Repository.findOne({
-      machines: [{
-        machine_id: machine
-      }]
+      where: {
+        'machines': { machine_id: machine }
+      }
     })
 
     if (machineAlreadyRegistered) {
@@ -59,9 +60,9 @@ class UnitManageService {
     const unit02Repository = getCustomRepository(Unit02Repository);
 
     const machineAlreadyInUnit = await unit01Repository.findOne({
-      machines: [{
-        machine_id: machine
-      }]
+      where: {
+        'machines': { machine_id: machine }
+      }
     })
 
     if (machineAlreadyInUnit) {
@@ -71,9 +72,9 @@ class UnitManageService {
     }
 
     const machineAlreadyRegistered = await unit02Repository.findOne({
-      machines: [{
-        machine_id: machine
-      }]
+      where: {
+        'machines': { machine_id: machine }
+      }
     })
 
     if (machineAlreadyRegistered) {
@@ -101,6 +102,26 @@ class UnitManageService {
     await unit02Repository.save(unitMachineField);
 
     return unitMachineField;
+  }
+
+  async listingAllUnits() {
+    const unit01Repository = getCustomRepository(Unit01Repository);
+    const unit02Repository = getCustomRepository(Unit02Repository);
+
+    let units = await unit01Repository.find();
+
+    const units2 = await unit02Repository.find()
+
+    //concatendando todas as duas unidades
+    units = [...units, units2[0]];
+
+    if (!units) {
+      return ({
+        message: "Any units registered!"
+      })
+    }
+
+    return units;
   }
 }
 

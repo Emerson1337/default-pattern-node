@@ -1,4 +1,3 @@
-import '../env/.env';
 import { getCustomRepository, getMongoRepository } from "typeorm";
 import UsersRepository from "../repositories/UserRepository";
 import bcrypt from 'bcrypt';
@@ -16,7 +15,7 @@ class LoginUserService {
     const userFromDB = await userRepository.findOne({ email });
 
     function generateToken(params = {}) {
-      return jwt.sign(params, 'bananas', {
+      return jwt.sign(params, process.env.PASS_TOKEN_JWT, {
         expiresIn: 86400
       })
     }

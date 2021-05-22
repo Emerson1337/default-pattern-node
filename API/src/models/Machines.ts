@@ -4,7 +4,6 @@ import {
   ObjectIdColumn,
   Column
 } from "typeorm";
-import User_id from '../models/User_idClass'
 
 @Entity()
 class Machine {

@@ -1,9 +1,11 @@
 import { getCustomRepository } from "typeorm";
+import { isConstructorDeclaration } from "typescript";
 import Machine from "../models/Machines";
 import MachinesRepository from "../repositories/MachineRepository";
 import UsersRepository from "../repositories/UserRepository";
 
 interface MachineData {
+  nome?: string,
   image: string,
   name: string,
   description: string,
@@ -13,15 +15,28 @@ interface MachineData {
   health: number,
 }
 
-class CreateMachineService {
+class MachineService {
   public async execute({ image, name, description, model, supervisor, status, health }: MachineData) {
     const machineRepository = getCustomRepository(MachinesRepository);
     const userRepository = getCustomRepository(UsersRepository);
     const id = supervisor;
     const userExists = await userRepository.findOne(id)
 
+    //algumas regras de negócio a respeito do input do usuário
+    if (status != "Em Alerta") {
+      if (status != "Em Parada") {
+        if (status != "Em Operação") {
+          status = "Em Parada";
+        }
+      }
+    }
+
+    if (health < 0 || health > 100) {
+      return ({ error: "Health level invalid!" })
+    }
+
     if (!userExists) {
-      return ({ error: "Este responsável não pertence a empresa!" })
+      return ({ error: "This user doesn't exists!" })
     }
 
     const machineWithSameName = await machineRepository.findOne({ name });
@@ -64,6 +79,35 @@ class CreateMachineService {
 
     return machineExists;
   }
+
+  public async updateData({ nome, image, name, description, model, supervisor, status, health }: MachineData) {
+    const machineRepository = getCustomRepository(MachinesRepository);
+    const machineInDB = await machineRepository.findOne({ name: nome });
+
+    if (machineInDB) {
+      machineRepository.delete(machineInDB);
+    }
+
+    const machine = new Machine();
+    machine.image = image;
+    machine.name = name;
+    machine.description = description;
+    machine.model = model;
+    machine.status = status;
+    machine.supervisor = supervisor;
+    machine.health = health;
+
+    await machineRepository.save(machine);
+
+    return machine;
+  }
+
+  public async searchMachineByName(name: string) {
+    const machineRepository = getCustomRepository(MachinesRepository);
+    const machineInDB = await machineRepository.findOne({ name: name });
+
+    return machineInDB;
+  }
 }
 
-export default CreateMachineService;
+export default MachineService;

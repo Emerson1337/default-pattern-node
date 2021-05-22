@@ -1,10 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import Machine from "../models/Machines";
-import User_id from "../models/User_idClass";
 import MachinesRepository from "../repositories/MachineRepository";
 import UsersRepository from "../repositories/UserRepository";
-
-var ObjectId = require('mongodb').ObjectId;
 
 interface MachineData {
   image: string,

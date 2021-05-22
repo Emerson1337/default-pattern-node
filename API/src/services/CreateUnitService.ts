@@ -1,13 +1,12 @@
 import { getCustomRepository } from "typeorm";
 import Unit01 from "../models/Unit01";
 import Unit02 from "../models/Unit02";
-import Unit01Repository from "../repositories/Unit01Repository copy";
+import Unit01Repository from "../repositories/Unit01Repository";
 import Unit02Repository from "../repositories/Unit02Repository";
 
 interface UnitData {
   name: string;
-  machine: [];
-  supervisors: [];
+  machine?: [];
 }
 
 class CreateUnitService {
@@ -17,7 +16,7 @@ class CreateUnitService {
     const unit01AlreadyExists = await unit01Repository.findOne({ name });
 
     if (unit01AlreadyExists) {
-      return ({ error: "Esta unidade já foi cadastrada!" })
+      return ({ error: "This unit was already registered!" })
     }
     const unit = new Unit01();
     unit.name = name;
@@ -34,7 +33,7 @@ class CreateUnitService {
     const unit02AlreadyExists = await unit02Repository.findOne({ name });
 
     if (unit02AlreadyExists) {
-      return ({ error: "Esta unidade já foi cadastrada!" })
+      return ({ error: "This unit was already registered!" })
     }
     const unit = new Unit02();
     unit.name = name;

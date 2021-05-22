@@ -5,14 +5,9 @@ import {
   Column
 } from "typeorm";
 
-class User_id {
-  @ObjectIdColumn()
-  user_id: ObjectID;
-}
-
 class Machine_id {
-  @ObjectIdColumn()
-  machine_id: ObjectID;
+  @Column()
+  machine_id: string;
 }
 
 @Entity()
@@ -24,7 +19,7 @@ class Unit01 {
   name: string;
 
   @Column(type => Machine_id)
-  machine: Machine_id[];
+  machines: Machine_id[];
 }
 
 export default Unit01;

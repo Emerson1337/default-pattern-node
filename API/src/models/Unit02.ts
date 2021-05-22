@@ -4,8 +4,11 @@ import {
   ObjectIdColumn,
   Column
 } from "typeorm";
-import User from "./Users";
-import Machine from "./Machines";
+
+class Machine_id {
+  @Column()
+  machine_id: string;
+}
 
 @Entity()
 class Unit02 {
@@ -15,11 +18,8 @@ class Unit02 {
   @Column()
   name: string;
 
-  @Column(type => User)
-  supervisors: User[];
-
-  @Column(type => Machine)
-  machine: Machine[];
+  @Column(type => Machine_id)
+  machines: Machine_id[];
 }
 
 export default Unit02;

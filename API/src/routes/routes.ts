@@ -14,8 +14,8 @@ const router = Router();
 //API ROUTES
 //AUTH AND OTHER THINS ABOUT USER
 router.post("/api/signup", createUserController.create);
-router.post("/api/create-unit", createUnitController.executeUni01);
-router.post("/api/create-unit2", createUnitController.executeUni02);
+router.post("/api/create-unit-01", createUnitController.executeUni01);
+router.post("/api/create-unit-02", createUnitController.executeUni02);
 router.post("/api/login", createUserController.login);
 
 //CONFIG MACHINES
@@ -24,5 +24,6 @@ router.post("/api/listing-machines", createMachineController.listingMachines);
 router.post("/api/listing-all-machines", createMachineController.listingAllMachines);
 
 //CONFIG UNITS (ADD, REMOVE and LIST USERS/MACHINES)
-router.post("/api/add-machine-on-unit", unitManagerController.addMachineToUnit01);
+router.post("/api/add-machine-on-unit-01", unitManagerController.addMachineToUnit01);
+router.post("/api/add-machine-on-unit-02", unitManagerController.addMachineToUnit02);
 export default router;

@@ -5,16 +5,15 @@ import MachinesRepository from "../repositories/MachineRepository";
 import UsersRepository from "../repositories/UserRepository";
 
 interface MachineData {
-  nome?: string,
-  image: string,
-  name: string,
-  description: string,
-  model: string,
-  supervisor: string,
+  id?: string;
+  image: string;
+  name: string;
+  description: string;
+  model: string;
+  supervisor: string;
   status: string;
-  health: number,
+  health: number;
 }
-
 class MachineService {
   public async execute({ image, name, description, model, supervisor, status, health }: MachineData) {
     const machineRepository = getCustomRepository(MachinesRepository);
@@ -63,7 +62,7 @@ class MachineService {
     const machineRepository = getCustomRepository(MachinesRepository);
     const machineExists = await machineRepository.findOne({ where: { name, model } })
     if (!machineExists) {
-      return ({ error: "Esta máquina não foi cadastrada!" })
+      return ({ error: "Machine was not registered!" })
     }
 
     return machineExists;
@@ -74,15 +73,15 @@ class MachineService {
     const machineExists = await machineRepository.find();
 
     if (!machineExists) {
-      return ({ error: "Nenhuma máquina cadastrada!" })
+      return ({ error: "Any machine registered!" })
     }
 
     return machineExists;
   }
 
-  public async updateData({ nome, image, name, description, model, supervisor, status, health }: MachineData) {
+  public async updateData({ id, image, name, description, model, supervisor, status, health }: MachineData) {
     const machineRepository = getCustomRepository(MachinesRepository);
-    const machineInDB = await machineRepository.findOne({ name: nome });
+    const machineInDB = await machineRepository.findOne(id);
 
     if (machineInDB) {
       machineRepository.delete(machineInDB);
@@ -102,11 +101,24 @@ class MachineService {
     return machine;
   }
 
-  public async searchMachineByName(name: string) {
+  public async searchMachineByName(id: string) {
     const machineRepository = getCustomRepository(MachinesRepository);
-    const machineInDB = await machineRepository.findOne({ name: name });
+    const machineInDB = await machineRepository.findOne(id);
 
     return machineInDB;
+  }
+
+  public async updateSupervisor({ id, supervisor }) {
+    const machineRepository = getCustomRepository(MachinesRepository);
+    const machineInDB = await machineRepository.findOne(id);
+    if (!machineInDB) {
+      return ({ error: "Machine not found!" })
+    }
+
+    machineInDB.supervisor = supervisor;
+    await machineRepository.delete(machineInDB);
+    await machineRepository.save(machineInDB);
+    return machineInDB
   }
 }
 

@@ -36,9 +36,7 @@ class UnitManageController {
 
     await authService.execute(id); //apenas verificando se o usuário existe
 
-    const units = await unitManageService.listingAllUnits();
-
-    return response.status(200).json(units);
+    return response.status(200).json(await unitManageService.listingAllUnits());
   }
 
 }

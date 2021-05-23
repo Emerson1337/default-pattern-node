@@ -20,7 +20,7 @@ class CreateUnitService {
     }
     const unit = new Unit01();
     unit.name = name;
-    unit.machine = machine;
+    unit.machines = machine;
 
     await unit01Repository.save(unit);
 
@@ -37,7 +37,7 @@ class CreateUnitService {
     }
     const unit = new Unit02();
     unit.name = name;
-    unit.machine = machine;
+    unit.machines = machine;
 
     await unit02Repository.save(unit);
 

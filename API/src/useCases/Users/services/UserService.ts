@@ -1,8 +1,7 @@
 import { getCustomRepository } from "typeorm";
-import UsersRepository from "../repositories/UserRepository";
+import UsersRepository from "../../../repositories/UserRepository";
 
 class UserService {
-
   async listingAllEmployees() {
     const usersRepository = getCustomRepository(UsersRepository);
     const users = await usersRepository.find();

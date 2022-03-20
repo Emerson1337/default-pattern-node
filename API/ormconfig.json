@@ -7,7 +7,7 @@
   "logging": false,
   "useUnifiedTopology": true,
   "entities": [
-    "./src/models/*.ts"
+    "./src/entities/*.ts"
   ],
   "migrations": [
     "./src/database/migrations/*.ts"

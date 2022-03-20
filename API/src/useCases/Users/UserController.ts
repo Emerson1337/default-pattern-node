@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import AuthService from '../services/AuthService';
-import UserService from "../services/UserService";
+import AuthService from '../../useCases/Auth/services/AuthService';
+import UserService from "./services/UserService";
 
 class UserController {
   async listAllEmployees(request: Request, response: Response) {

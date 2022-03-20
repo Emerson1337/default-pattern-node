@@ -1,5 +1,5 @@
 import { getCustomRepository, getMongoRepository } from "typeorm";
-import UsersRepository from "../repositories/UserRepository";
+import UsersRepository from "../../../repositories/UserRepository";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 

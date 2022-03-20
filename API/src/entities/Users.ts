@@ -1,16 +1,11 @@
 import {
   Entity,
-  ObjectID,
-  ObjectIdColumn,
   Column
 } from "typeorm";
+import DefaultClass from "./DefaultClass";
 
 @Entity()
-class User {
-
-  @ObjectIdColumn()
-  id: ObjectID;
-
+class User extends DefaultClass {
   @Column()
   name: string;
 

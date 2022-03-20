@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import CreateUserService from '../services/CreateUserService';
-import LoginUserService from '../services/LoginUserService';
+import CreateUserService from '../../useCases/Users/services/CreateUserService';
+import LoginUserService from '../../useCases/Auth/services/LoginUserService';
 
 class CreateUserController {
   async create(request: Request, response: Response) {

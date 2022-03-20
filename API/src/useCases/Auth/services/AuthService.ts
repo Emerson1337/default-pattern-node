@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import UsersRepository from "../repositories/UserRepository";
+import UsersRepository from "../../../repositories/UserRepository";
 
 class AuthService {
   async execute({ id }) {
